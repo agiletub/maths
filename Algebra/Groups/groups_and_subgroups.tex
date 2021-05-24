@@ -1,0 +1,182 @@
+%Preamble%
+\documentclass[11pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+
+%Packages%
+%TikZ%
+\usepackage{physics}
+\usepackage{amsmath}
+\usepackage{tikz}
+\usepackage{mathdots}
+\usepackage{yhmath}
+\usepackage{cancel}
+\usepackage{color}
+\usepackage{siunitx}
+\usepackage{array}
+\usepackage{multirow}
+\usepackage{amssymb}
+\usepackage{tabularx}
+\usepackage{booktabs}
+\usetikzlibrary{fadings}
+\usetikzlibrary{patterns}
+\usetikzlibrary{shadows.blur}
+\usetikzlibrary{shapes}
+\usepackage{extarrows}
+%Document Layout
+\usepackage{geometry} %Page dimensions
+\usepackage{fancyhdr} %Custom Headers
+\usepackage{footmisc} %Custom Footers
+\usepackage{titlesec} %Title and Section Formatting
+\usepackage{array}
+%Formatting Packages%
+\usepackage{xcolor} %For color%
+\usepackage{graphicx} %For Images%
+%\graphicspath{ {images/} }
+%Miscellaneous Packages%
+%Bibliographies
+\usepackage{hyperref} %Hyperlinks
+\usepackage{enumitem} %Advanced Lists
+\usepackage{comment} %Multiline Comments
+%Math Packages%
+\usepackage{mathtools, amsmath, nccmath, amsfonts, amssymb, amsthm, thmtools}
+%Page Geometry%
+\geometry{
+    a4paper,
+    total={170mm,257mm},
+    left=20mm,
+    top=20mm,
+    headheight=14pt
+}
+
+
+%%%%%%%%%%%Dark Mode Stuff%%%%%%%%%%%%%%
+%\definecolor{mybgcolor}{RGB}{6.9, 6.9, 6.9}
+%\pagecolor{mybgcolor}
+%\color[rgb]{1,1,1}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%Theorem Environments%
+%Ref:https://math.ucsd.edu/~jeggers/latex/amsthdoc.pdf%
+\theoremstyle{plain}% default 
+\newtheorem{thm}{Theorem}[section] 
+\newtheorem{lem}{Lemma}[thm] 
+\newtheorem{prop}[lem]{Proposition} 
+\newtheorem{cor}{Corollary}[thm]
+\newtheorem*{claim}{Claim}
+\newtheorem{case}{Case}
+\theoremstyle{definition}
+\newtheorem*{ques}{Question}
+\newtheorem{conj}{Conjecture}[section]
+\newtheorem{exmp}{Example}[section]
+\newtheorem{exer}{Exercise}[section]
+\theoremstyle{remark} 
+\newtheorem*{note}{Note}
+
+\newtheoremstyle{breakthm}% %For leaving a line after theorem header
+	{}{}%
+	{\itshape}{}%
+	{\bfseries}{}%
+	{\newline}{}
+	% The above doesnt work really well with enum lists, so for that we have to start the theorem as 
+	% \begin{breakthm}[...]
+	% \leavevmode \vspace{-\baselineskip}
+	% \begin{enumerate}
+	%Use breakenum snippet for this!
+	%For more info on thereom styles: Check this: http://www.ams.org/arc/tex/amscls/amsthdoc.pdf
+
+\theoremstyle{breakthm}
+\newtheorem{bthm}{Theorem}[section]
+\newtheorem{blem}{Lemma}[section]
+
+\newtheoremstyle{breakdefn}% %For leaving a line after defn header
+	{}{}%
+	{}{}%
+	{\bfseries}{:}%
+	{\newline}{}
+
+\theoremstyle{breakdefn}
+\newtheorem{defn}{Definition}[section] 
+\newtheorem*{bques}{Question}
+\newtheorem{bconj}{Conjecture}[section]
+\newtheorem{bexmp}{Example}[section]
+\newtheorem{bexer}{Exercise}[section]
+
+\newtheoremstyle{breakrem}% %For leaving a line after remark header
+	{}{}%
+	{}{}%
+	{\itshape \bfseries}{:}%
+	{\newline}{}
+	
+\theoremstyle{breakrem}
+\newtheorem*{rem}{Remark(s)}
+
+%Command Changes%
+\renewcommand{\contentsname}{Table of Contents:}
+\renewenvironment{proof}{{\bfseries Proof.}}{ \\ \qed}
+
+%New Custom Commands%
+%Math Notations
+\newcommand{\R}{{\mathbb R}}
+\newcommand{\Z}{{\mathbb Z}}
+\newcommand{\N}{{\mathbb N}}
+\newcommand{\Q}{{\mathbb Q}}
+\newcommand{\C}{{\mathbb C}}
+\newcommand{\multdot}{\text{·}}
+\newcommand{\sq}{\ensuremath{^2}}
+\newcommand\numberthis{\addtocounter{equation}{1}\tag{\theequation}}
+%Simple Footnote
+\newcommand{\simplefn}[1]{\hfill \sl{\footnotesize{#1}} \\}
+%Section Decoration
+\newcommand{\sectiondecor}{
+    \begin{center}
+    \vspace{-0.2in}
+    \line(1,0){300} \\
+    \large{$\infty$}    
+    \end{center}
+}
+%Syllabus Commands
+\newcommand{\infopointer}[2]{\large{\textbf{#1:}} \textit{#2}}
+%For Notes:
+\newcommand{\remarklinebreak}{\hfill \break \vspace{-0.3in}}
+
+%%%MAIN DOC BEGINS%%%
+\title{Groups and Subgroups}
+\author{\textbf{Sanjyot Shenoy}}
+\date{2021}
+
+
+\pagestyle{fancy}
+\fancyhf{}
+\lhead{Groups: Groups and Subgroups}
+\rhead{Sanjyot Shenoy}
+\rfoot{Page \thepage}
+\renewcommand{\footrulewidth}{0.4pt}
+
+\begin{document}
+	\maketitle
+	\tableofcontents
+	\section{Introduction}
+	\begin{defn}[Binary Operation]
+		A binary operation $*$ on a set $G$ is a function $*:G\times G\to G$. We shall write $*(a,b)$ as $a*b$. 
+	\end{defn}
+	\begin{defn}[Associative Binary Operation]
+		A binary operation $*$ on a set $G$ is said to be associative if $\forall a,b,c\in G$ we have that $a*(b*c)=(a*b)*c$.
+	\end{defn}
+	\begin{defn}[Commutative Binary Operation]
+		A binary operation $*$ on a set $G$ is said to be commuative if $\forall a,b\in G$ we have $a*b=b*a$.
+	\end{defn}
+	\begin{bexmp}
+		\leavevmode \vspace{-\baselineskip}
+		\begin{enumerate}
+			\item $+$ (usual addition) is a commutative binary operation on $\Z$ (or on $\Q$, $\R$, or $\C$ respectively). 
+			\item $\times $ (usual multiplication) is a commutative binary operation on $\Z$ (or on $\Q$, $\R$, or $\C$ respectively).
+		\end{enumerate}
+	\end{bexmp}
+	\begin{rem}This is a remark.	
+	\end{rem}
+	\begin{note}
+		This is a note.
+	\end{note}
+
+	\end{document}

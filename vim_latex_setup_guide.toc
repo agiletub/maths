@@ -1,0 +1,5 @@
+\contentsline {section}{\numberline {1}Setting up of Arch Linux}{1}{section.1}%
+\contentsline {section}{\numberline {2}Setting up Vim and Vim-Plug}{1}{section.2}%
+\contentsline {section}{\numberline {3}Installing \TeX -Live Package}{2}{section.3}%
+\contentsline {section}{\numberline {4}Installing and configuring vim plugins}{2}{section.4}%
+\contentsline {section}{\numberline {5}Setting up snippets for \TeX }{3}{section.5}%

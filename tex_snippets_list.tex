@@ -1,0 +1,225 @@
+%Preamble%
+\documentclass[11pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+
+%Packages%
+%TikZ%
+\usepackage{physics}
+\usepackage{amsmath}
+\usepackage{tikz}
+\usepackage{mathdots}
+\usepackage{yhmath}
+\usepackage{cancel}
+\usepackage{color}
+\usepackage{siunitx}
+\usepackage{array}
+\usepackage{multirow}
+\usepackage{amssymb}
+\usepackage{tabularx}
+\usepackage{booktabs}
+\usetikzlibrary{fadings}
+\usetikzlibrary{patterns}
+\usetikzlibrary{shadows.blur}
+\usetikzlibrary{shapes}
+\usepackage{extarrows}
+\usepackage{longtable}
+%Document Layout
+\usepackage{geometry} %Page dimensions
+\usepackage{fancyhdr} %Custom Headers
+\usepackage{footmisc} %Custom Footers
+\usepackage{titlesec} %Title and Section Formatting
+\usepackage{array}
+%Formatting Packages%
+\usepackage{xcolor} %For color%
+\usepackage{graphicx} %For Images%
+%\graphicspath{ {images/} }
+%Miscellaneous Packages%
+%Bibliographies
+\usepackage{hyperref} %Hyperlinks
+\usepackage{enumitem} %Advanced Lists
+\usepackage{comment} %Multiline Comments
+%Math Packages%
+\usepackage{mathtools, amsmath, nccmath, amsfonts, amssymb, amsthm, thmtools}
+%Page Geometry%
+\geometry{
+    a4paper,
+    total={170mm,257mm},
+    left=20mm,
+    top=20mm,
+    headheight=14pt
+}
+
+
+%%%%%%%%%%%Dark Mode Stuff%%%%%%%%%%%%%%
+%\definecolor{mybgcolor}{RGB}{6.9, 6.9, 6.9}
+%\pagecolor{mybgcolor}
+%\color[rgb]{1,1,1}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%Theorem Environments%
+%Ref:https://math.ucsd.edu/~jeggers/latex/amsthdoc.pdf%
+\theoremstyle{plain}% default 
+\newtheorem{thm}{Theorem}[section] 
+\newtheorem{lem}{Lemma}[thm] 
+\newtheorem{prop}[lem]{Proposition} 
+\newtheorem{cor}{Corollary}[thm]
+\newtheorem*{claim}{Claim}
+\newtheorem{case}{Case}
+\theoremstyle{definition}
+\newtheorem*{ques}{Question}
+\newtheorem{conj}{Conjecture}[section]
+\newtheorem{exmp}{Example}[section]
+\newtheorem{exer}{Exercise}[section]
+\theoremstyle{remark} 
+\newtheorem*{note}{Note}
+
+\newtheoremstyle{breakthm}% %For leaving a line after theorem header
+	{}{}%
+	{\itshape}{}%
+	{\bfseries}{}%
+	{\newline}{}
+	% The above doesnt work really well with enum lists, so for that we have to start the theorem as 
+	% \begin{breakthm}[...]
+	% \leavevmode \vspace{-\baselineskip}
+	% \begin{enumerate}
+	%Use breakenum snippet for this!
+	%For more info on thereom styles: Check this: http://www.ams.org/arc/tex/amscls/amsthdoc.pdf
+
+\theoremstyle{breakthm}
+\newtheorem{bthm}{Theorem}[section]
+\newtheorem{blem}{Lemma}[section]
+
+\newtheoremstyle{breakdefn}% %For leaving a line after defn header
+	{}{}%
+	{}{}%
+	{\bfseries}{:}%
+	{\newline}{}
+
+\theoremstyle{breakdefn}
+\newtheorem{defn}{Definition}[section] 
+\newtheorem*{bques}{Question}
+\newtheorem{bconj}{Conjecture}[section]
+\newtheorem{bexmp}{Example}[section]
+\newtheorem{bexer}{Exercise}[section]
+
+\newtheoremstyle{breakrem}% %For leaving a line after remark header
+	{}{}%
+	{}{}%
+	{\itshape \bfseries}{:}%
+	{\newline}{}
+	
+\theoremstyle{breakrem}
+\newtheorem*{rem}{Remarks}
+
+%Command Changes%
+\renewcommand{\contentsname}{Table of Contents}
+\renewenvironment{proof}{{\bfseries Proof.}}{ \\ \qed}
+
+%New Custom Commands%
+%Math Notations
+\newcommand{\R}{{\mathbb R}}
+\newcommand{\Z}{{\mathbb Z}}
+\newcommand{\N}{{\mathbb N}}
+\newcommand{\Q}{{\mathbb Q}}
+\newcommand{\C}{{\mathbb C}}
+\newcommand{\multdot}{\text{·}}
+\newcommand{\sq}{\ensuremath{^2}}
+\newcommand\numberthis{\addtocounter{equation}{1}\tag{\theequation}}
+%Simple Footnote
+\newcommand{\simplefn}[1]{\hfill \sl{\footnotesize{#1}} \\ }
+%Section Decoration
+\newcommand{\sectiondecor}{
+    \begin{center}
+    \vspace{-0.2in}
+    \line(1,0){300} \\
+    \large{$\infty$}    
+    \end{center}
+}
+%Syllabus Commands
+\newcommand{\infopointer}[2]{\large{\textbf{#1:}} \textit{#2}}
+%For Notes:
+\newcommand{\remarklinebreak}{\hfill \break \vspace{-0.3in}}
+
+%%%MAIN DOC BEGINS%%%
+\title{\TeX\, Snippets List}
+\author{\textbf{Sanjyot Shenoy}}
+\date{Last Update: 22/05/2021}
+
+
+\pagestyle{fancy}
+\fancyhf{}
+\lhead{\TeX\, Snippets List}
+\rhead{Sanjyot Shenoy}
+\rfoot{Page \thepage}
+\renewcommand{\footrulewidth}{0.4pt}
+
+\begin{document}
+	\maketitle
+	\tableofcontents
+	\section{Introduction}
+	This resource is like a reference for all the snippets. If you wish to understand how the snippets work and some syntax related help, you should check out he UltiSnips: Snippets guide. \par
+	So the entire list is represented as a table, with columns explaining a certain aspect of the snippets.
+	\section{Table Legend}
+	\begin{enumerate}
+		\item\textbf{Trigger Word}: The trigger word is what needs to be typed in order to trigger the corresponding snippet. The snippet may be triggered automatically or by using the <Tab> trigger key.
+		\item\textbf{Description}: The description of the snippet.
+		\item\textbf{Priority}: Priority number of the snippet.
+		\item\textbf{Snippet Options}: The snippet options are the ones UltiSnips uses to understand how to and when to trigger the snippet, for more information, you can look up the snippet guide document
+		\item\textbf{Math Mode Only?}: Some snippets can be triggered only inside math mode and this is to distinguish those.
+		\item\textbf{Notes}: Some tips or remarks on the snippet.
+	\end{enumerate}
+	\section{Snippet Reference List}
+	\subsection{General \LaTeX\ Command Snippets}
+	\begin{center}
+	\begin{table}[htbp]
+		\begin{tabular}{||m{2cm}|m{1.5cm}|m{3cm}|m{1.5cm}|m{2.5cm}|m{4cm}||}
+		\hline
+		\textbf{Trigger Word} & \textbf{Priority} & \textbf{Description} & \textbf{Options} & \textbf{Math Mode Only?} & \textbf{Notes} \\
+		\hline
+		\hline
+		template & 0 &Basic Template Generation & b & N & Use tab triggers to generate title, date and header text. \\ \hline
+		beg & 0 & Begin Environment & bA & N & Use tab tigger to move inside the block with indent. \\ \hline
+		... & 100 & \textbackslash ldots & iA & N & Lower Dots \\ \hline 
+		\end{tabular}
+	\end{table}
+	\newpage
+	\begin{table}[htbp]
+		\begin{tabular}{||m{2cm}|m{1.5cm}|m{3cm}|m{1.5cm}|m{2.5cm}|m{4cm}||}
+		\hline
+		\textbf{Trigger Word} & \textbf{Priority} & \textbf{Description} & \textbf{Options} & \textbf{Math Mode Only?} & \textbf{Notes} \\
+		\hline
+		\hline
+		enum & 0 & Enumerate List & bA & N &  \\ \hline
+		breakenum & 0 & Break Thm. Enum. List & bA & N &  \\ \hline
+		item & 0 & Item List & bA & N &  \\ \hline
+		breakitem & Break Thm. Item List & bA &  & N &  \\ \hline
+		desc & 0 & Description List & b & N &  \\ \hline
+		breakdesc & 0 & Break Thm. Desc. List & b & N &  \\ \hline
+		pac & 0 & Package & b & N & Use pacakage command \\ \hline
+		mk &  & 0 &  &  &  \\ \hline
+		dm &  & 0 &  &  &  \\ \hline
+		ali &  & 0 &  &  &  \\ \hline
+		$\frac{d_3}{d_2}$ $ &  & 0 &  &  &  \\ \hline
+		 &  & 0 &  &  &  \\ \hline
+		 &  & 0 &  &  &  \\ \hline
+		 &  & 0 &  &  &  \\ \hline
+		 &  & 0 &  &  &  \\ \hline
+		 &  & 0 &  &  &  \\ \hline
+		 &  &  &  &  &  \\ \hline
+		\end{tabular}
+	\end{table}
+	\end{center}
+	\subsection{Maths Notation Snippets}	
+	\begin{center}
+	\begin{table}[htbp]
+		\begin{tabular}{||m{2cm}|m{1.5cm}|m{3cm}|m{1.5cm}|m{2.5cm}|m{4cm}||}
+		\hline
+		\textbf{Trigger Word} & \textbf{Priority} & \textbf{Description} & \textbf{Options} & \textbf{Math Mode Only?} & \textbf{Notes} \\
+		\hline
+		\hline
+		... & 100 & \textbackslash ldots & iA & N & Lower Dots \\ \hline 
+		\end{tabular}
+	\end{table}
+	\end{center}
+\end{document}

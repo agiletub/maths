@@ -1,0 +1,232 @@
+%Preamble%
+\documentclass[11pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+
+%Packages%
+%TikZ%
+\usepackage{physics}
+\usepackage{amsmath}
+\usepackage{tikz}
+\usepackage{mathdots}
+\usepackage{yhmath}
+\usepackage{cancel}
+\usepackage{color}
+\usepackage{siunitx}
+\usepackage{array}
+\usepackage{multirow}
+\usepackage{amssymb}
+\usepackage{tabularx}
+\usepackage{booktabs}
+\usetikzlibrary{fadings}
+\usetikzlibrary{patterns}
+\usetikzlibrary{shadows.blur}
+\usetikzlibrary{shapes}
+\usepackage{extarrows}
+%Document Layout
+\usepackage{geometry} %Page dimensions
+\usepackage{fancyhdr} %Custom Headers
+\usepackage{footmisc} %Custom Footers
+\usepackage{titlesec} %Title and Section Formatting
+\usepackage{array}
+%Formatting Packages%
+\usepackage{xcolor} %For color%
+\usepackage{graphicx} %For Images%
+%\graphicspath{ {images/} }
+%Miscellaneous Packages%
+%Bibliographies
+\usepackage{hyperref} %Hyperlinks
+\usepackage{enumitem} %Advanced Lists
+\usepackage{comment} %Multiline Comments
+%Math Packages%
+\usepackage{mathtools, amsmath, nccmath, amsfonts, amssymb, amsthm, thmtools}
+%Page Geometry%
+\geometry{
+    a4paper,
+    total={170mm,257mm},
+    left=20mm,
+    top=20mm,
+    headheight=14pt
+}
+
+
+%%%%%%%%%%%Dark Mode Stuff%%%%%%%%%%%%%%
+%\definecolor{mybgcolor}{RGB}{6.9, 6.9, 6.9}
+%\pagecolor{mybgcolor}
+%\color[rgb]{1,1,1}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%Theorem Environments%
+%Ref:https://math.ucsd.edu/~jeggers/latex/amsthdoc.pdf%
+\theoremstyle{plain}% default 
+\newtheorem{thm}{Theorem}[section] 
+\newtheorem{lem}{Lemma}[thm] 
+\newtheorem{prop}[lem]{Proposition} 
+\newtheorem{cor}{Corollary}[thm]
+\newtheorem*{claim}{Claim}
+\newtheorem{case}{Case}
+\theoremstyle{definition}
+\newtheorem{defn}{Definition}[section] 
+\newtheorem*{ques}{Question}
+\newtheorem{conj}{Conjecture}[section]
+\newtheorem{exmp}{Example}[section]
+\newtheorem{exer}{Exercise}[section]
+\theoremstyle{remark} 
+\newtheorem*{rem}{Remark} 
+\newtheorem*{note}{Note}
+
+%Command Changes%
+\renewcommand{\contentsname}{Table of Contents}
+\renewenvironment{proof}{{\bfseries Proof.}}{ \\ \qed}
+
+%New Custom Commands%
+%Math Notations
+\newcommand{\R}{{\mathbb R}}
+\newcommand{\Z}{{\mathbb Z}}
+\newcommand{\N}{{\mathbb N}}
+\newcommand{\Q}{{\mathbb Q}}
+\newcommand{\C}{{\mathbb C}}
+\newcommand{\multdot}{\text{·}}
+\newcommand{\sq}{\ensuremath{^2}}
+\newcommand\numberthis{\addtocounter{equation}{1}\tag{\theequation}}
+%Simple Footnote
+\newcommand{\simplefn}[1]{\hfill \sl{\footnotesize{#1}} \\ }
+%Section Decoration
+\newcommand{\sectiondecor}{
+    \begin{center}
+    \vspace{-0.2in}
+    \line(1,0){300} \\
+    \large{$\infty$}    
+    \end{center}
+}
+%Syllabus Commands
+\newcommand{\infopointer}[2]{\large{\textbf{#1:}} \textit{#2}}
+%For Notes:
+\newcommand{\remarklinebreak}{\hfill \break \vspace{-0.3in}}
+
+%%%MAIN DOC BEGINS%%%
+\title{UltiSnips: Snippets Guide}
+\author{\textbf{Sanjyot Shenoy}}
+\date{2021}
+
+
+\pagestyle{fancy}
+\fancyhf{}
+\lhead{UltiSnips: Snippets Guide}
+\rhead{Sanjyot Shenoy}
+\rfoot{Page \thepage}
+\renewcommand{\footrulewidth}{0.4pt}
+
+\begin{document}
+	\maketitle
+	\tableofcontents
+	\section{Introduction}
+	We use the UltiSnips Plugin for Vim to write our custom snippets for not just \LaTeX\, files but also, any file extensions. \\
+	\textbf{For a complete and detailed use of UltiSnips and its syntax, you can check the official documentation here: \\
+	\url{https://github.com/SirVer/ultisnips/blob/master/doc/UltiSnips.txt}.\\ 
+	We will use this documentation as a reference, so do keep it handy or open. The section of the official documentation on which these sections are based on are mentioned in the parentheses.}
+	\section{Keywords and Syntax}
+	We now see some of the basic syntax required for writing own snippets, or understanding them, most of this is directly taken from the official documentation given above. 
+	\subsection{Comments (Based on \S4.1.2)}
+	All lines starting with a \# character areconsidered comments. Comments are ignored by UltiSnips. Use them to document snippets.
+	\subsection{\texttt{extends} (Based on \S4.1.2)}
+	This is basically used to 'extend' or 'activate' snippets of a different file type to the current file type. An example would be to extend the snippets of .c to .cpp file types. Multiple 'extends' lines are permitted in a snippet file, and they can be included anywhere in the file. When the 'extends' directive is included in a snippet file, it instructs UltiSnips to include all snippets from the indicated filetypes. \\
+	\textbf{Syntax:} \texttt{extends ft1, ft2, ft3}\\
+	\textbf{Example:} In cpp.snippets we have \texttt{extends c}
+
+	\subsection{\texttt{priority} (Based on \S4.1.2)}
+	A line beginning with the keyword 'priority' sets the priority for all snippets defined in the current file after this line. The default priority for a file is always 0. When a snippet should be expanded, UltiSnips will collect all snippet definitions from all sources that match the trigger and keep only the ones with the highest priority. For example, all shipped snippets have a priority < 0, so that user defined snippets always overwrite shipped snippets.\\
+	\textbf{Syntax:} \texttt{priority n}\\
+	\textbf{Example:} \texttt{priority 1000}
+
+	\subsection{\texttt{snippet} (Based on \S4.1.2)}
+	A line beginning with the keyword 'snippet' marks the beginning of a snippet definition and a line starting with  the keyword 'endsnippet' marks the end. The snippet definition is placed between the lines.\\
+	\textbf{Syntax:} If trigger word has no spaces: \\ \texttt{snippet trigger\_word [ "description" [ options ] ] \\
+	snippet definition\\
+	endsnippet}\\
+	If trigger word has spaces: \\ \texttt{snippet "trigger word" [ "description" [ options ] ]\\
+	snippet definition\\
+	endsnippet}\\
+	Note: It is not technically necessary to use quotes to wrap a trigger with spaces. Any matching characters will do. For example, '! !' or '? ?'. \\	
+	\textbf{Example:} This is a \TeX-snippet for \textbackslash ldots\\ 
+	\texttt{
+	snippet ... "ldots" iA \\
+	\textbackslash ldots \\
+	endsnippet}
+	\subsubsection{\texttt{description} (Based on \S4.1.2)}
+	The 'description' is a string describing the trigger. It is helpful for documenting the snippet and for distinguishing it from other snippets with the same tab trigger. When a snippet is activated and more than one tab trigger match, UltiSnips displays a list of the matching snippets with their descriptions. The user then selects the snippet they want.
+	\subsubsection{Snippet Options (Based on \S4.1.3)}	
+	The 'options' control the behavior of the snippet. Options are indicated by single characters. The 'options' characters for a snippet are combined into a word without spaces. \\
+	There are a lot of options, which can be checked in \S 4.1.3 of UltiSnips Documentation. We will only mention the widely used ones.
+	\begin{description}
+		\item[\texttt{b}]: Beginning of line - A snippet with this option is expanded only if the tab trigger is the first word of the line. In other words, if only whitespace precedes the tab trigger, expand.  
+		\item[\texttt{i}]: In-word expansion - A snippet with this option is expanded regardless of the preceding character. In other words, the snippet can be triggered in the middle of a word.
+		\item[\texttt{A}]: Snippet will be triggered automatically, when condition matches.
+		\item[\texttt{e}]: With this option expansion of snippet can be controlled not only by previous characters in line, but by any given python expression. This option can be specified along with other options, like 'b'.
+		\item[\texttt{r}]: Regular Expression - With this option, the tab trigger is expected to  be a python regular expression. The snippet is expanded if the recently typed characters match the regular expression. Note: The regular expression MUST be quoted (or surrounded with another character) like a multi-word tab trigger (see above) whether it has spaces or not. A resulting match is passed to any python code blocks in the snippet definition as the local variable "match".
+	\end{description}
+	\subsection{Character Escaping (Based on \S4.1.4)}
+	 In snippet definitions, the characters '`', '\{', '\$' and '\textbackslash' have special meaning. If you want to insert one of these characters literally, escape them with a backslash, '\textbackslash'. 
+
+		 \subsection{Visual Placeholder (Based on \S4.3)}
+	Snippets can contain a special placeholder called \$\{VISUAL\}. The \$\{VISUAL\} variable is expanded with the text selected just prior to expanding the snippet.\\
+	The selected text is deleted, and you are dropped into Insert mode. Now type the snippet tab trigger and press the key to trigger expansion. As the snippet expands, the previously selected text is printed in place of the \$\{VISUAL\} placeholder. \\
+	The \$\{VISUAL\} placeholder can contain default text to use when the snippet has been triggered when not in Visual mode.\\
+	\textbf{Syntax:} \texttt{\$\{VISUAL:default text\}}\\
+	The \$\{VISUAL\} placeholder can also define a transformation (see |UltiSnips-transformations|). For more on this, check section on transformations. \\
+	\textbf{Syntax:} \texttt{\$\{VISUAL:default/search/replace/option\}} \\
+	If this seems confusing, check the documentation \S4.3 example or \S4.7.
+
+	\subsection{Tabstops and Placeholders (Based on \S4.5)}
+	Snippets are used to quickly insert reused text into a document. Often the text has a fixed structure with variable components. Tabstops are used to simplify modifying the variable content. With tabstops you can easily place the cursor at the point of the variable content, enter the content you want, then jump to the next variable component, enter that content, and continue until all the variable components are complete.\\
+	\textbf{Syntax:} The syntax for a tabstop is the dollar sign followed by a number, for example, '\$1'. Tabstops start at number 1 and are followed in sequential order. The '\$0' tabstop is a special tabstop. It is always the last tabstop in the snippet no matter how many tabstops are defined. If there is no '\$0' defined, '\$0' tabstop will be defined at the end of the snippet.\\
+	\textbf{Note (Jumping forward and backward):} You can use <c-j> to jump to the next tabstop, and <c-k> to jump to tothe previous. The <Tab> key was not used for jumping forward because it is commonly used for completion.\\
+	\textbf{Syntax for default text:} It is often useful to have some default text for a tabstop. The default text may be a value commonly used for the variable component, or it may be a word or phrase that reminds you what is expected for the variable component. To include default text, the syntax is \texttt{'\${1:value}'}.\\
+	\textbf{Note (Nested Tabstops):} Sometimes it is useful to have a tabstop within a tabstop. To do this, simply include the nested tabstop as part of the default text. \\
+	Typing any text at the first tabstop replaces the default value, including the second tabstop, with the typed text. So the second tabstop is essentially deleted. When a tabstop jump is triggered, UltiSnips moves to the next remaining tabstop '\$0'. This feature can be used intentionally as a handy way for providing optional tabstop values to the user.\\
+	\textbf{Examples:} Can be seen in the official documentation.
+	\section{Interpolation (Based on \S4.4)}
+	Interpolation, in simple terms means the use of external programming/scripting languages in order to make the snippets more dynamic and make the snippets have the power to process simple logical/processing tasks. There are few interpolation methods which UltiSnips has the access to, which we will now discuss.
+	\subsection{Shellcode (i.e bash/zsh/etc.)(Based on \S4.4.1)}
+	Snippets can include shellcode. Put a shell command in a snippet and when the snippet is expanded, the shell command is replaced by the output produced when the command is executed.\\
+	The syntax for shellcode is simple: wrap the code in backticks, '`'. When a snippet is expanded, UltiSnips runs shellcode by first writing it to a temporary script and then executing the script. The shellcode is replaced by the standard output. \\
+	Anything you can run as a script can be used in shellcode. Include a shebang line, for example, \texttt{\#!/usr/bin/perl}, and your snippet has the ability to run scripts using other programs, perl, for example.\\
+	\textbf{Example:} This example insertes current date using shellcode. \\
+	\texttt{snippet today\\
+	Today is the `date +\%d.\%m.\%y`.\\
+	endsnippet}
+	\subsection{VimScript (Based on \S4.4.2)}
+	You can also use Vim scripts (sometimes called VimL) in interpolation. The syntax is similar to shellcode. Wrap the code in backticks and to distinguish it as a Vim script, start the code with '!v'. Here is an example that counts the indent of the current line: \\
+	\textbf{Example:} Used to indent. \\
+	\texttt{snippet indent\\
+	Indent is: `!v indent(".")`.\\
+	endsnippet}
+	\subsection{Python (Based on \S4.4.3)}
+	We recommend the reader to directly refer the documentation \S4.4.3, as the explanation is clear and concise there for snippets involving basic python evaluations. \\
+	Also, check this video for some neat examples/explanation of basic python snippets: \\
+	\url{http://vimcasts.org/episodes/ultisnips-python-interpolation/}\\
+	Python Regular Expression(Regex) Snippets require a good amount of expertise in understanding Regexes and their syntax. A Regex snippet works by making the trigger word as the Regex itself, and then snip.rv will use the match keyword for its completion. \\
+	Here are some good resources on Regex: 
+	\begin{enumerate}
+		\item An example-based guide which is much better to follow: \\
+			\url{https://realpython.com/regex-python/}
+		\item Official Python Documentation: \url{https://docs.python.org/3/library/re.html#}
+		\item W3Schools for testing with examples: \url{https://www.w3schools.com/python/python_regex.asp}
+		\item A great tool for visual breakdown of the Regex: \url{https://regexper.com/}
+		\item A great tool for testing Regex with explanation of all matches: \url{https://pythex.org/} 
+	\end{enumerate}
+	
+	\subsection{Global Snippets (Based on \S4.4.4)}
+	Global snippets provide a way to reuse common code in multiple snippets. Currently, only python code is supported. The result of executing the contents of a global snippet is put into the globals of each python block in the snippet file. \\
+	\textbf{Syntax:} To create a global snippet, use the keyword 'global' in place of 'snippet', and for python code, you use '!p' for the trigger. \\
+	For example, the following snippet produces the same output as just a normal python snippet. However, with this syntax the 'upper\_right' snippet can be reused by other snippets.\\
+	\textbf{Example:} \\
+	\texttt{global !p \\
+	def upper\_right(inp): \\
+	    return (75 - 2 * len(inp))*' ' + inp.upper() \\
+	endglobal}
+
+	\section{Transformations (Based on \S4.7)}
+	This is an advanced topic which is powerful but not frequently used, but we encourage you to study it through the documentation itself, in \S4.7.
+
+\end{document}

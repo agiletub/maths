@@ -1,0 +1,204 @@
+%Preamble%
+\documentclass[11pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+
+%Packages%
+%TikZ%
+\usepackage{physics}
+\usepackage{amsmath}
+\usepackage{tikz}
+\usepackage{mathdots}
+\usepackage{yhmath}
+\usepackage{cancel}
+\usepackage{color}
+\usepackage{siunitx}
+\usepackage{array}
+\usepackage{multirow}
+\usepackage{amssymb}
+\usepackage{tabularx}
+\usepackage{booktabs}
+\usetikzlibrary{fadings}
+\usetikzlibrary{patterns}
+\usetikzlibrary{shadows.blur}
+\usetikzlibrary{shapes}
+\usepackage{extarrows}
+%Document Layout
+\usepackage{geometry} %Page dimensions
+\usepackage{fancyhdr} %Custom Headers
+\usepackage{footmisc} %Custom Footers
+\usepackage{titlesec} %Title and Section Formatting
+\usepackage{array}
+%Formatting Packages%
+\usepackage{xcolor} %For color%
+\usepackage{graphicx} %For Images%
+%\graphicspath{ {images/} }
+%Miscellaneous Packages%
+%Bibliographies
+\usepackage{hyperref} %Hyperlinks
+\usepackage{enumitem} %Advanced Lists
+\usepackage{comment} %Multiline Comments
+%Math Packages%
+\usepackage{mathtools, amsmath, nccmath, amsfonts, amssymb, amsthm, thmtools}
+%Page Geometry%
+\geometry{
+    a4paper,
+    total={170mm,257mm},
+    left=20mm,
+    top=20mm,
+    headheight=14pt
+}
+
+
+%%%%%%%%%%%Dark Mode Stuff%%%%%%%%%%%%%%
+%\definecolor{mybgcolor}{RGB}{6.9, 6.9, 6.9}
+%\pagecolor{mybgcolor}
+%\color[rgb]{1,1,1}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%Theorem Environments%
+%Ref:https://math.ucsd.edu/~jeggers/latex/amsthdoc.pdf%
+\theoremstyle{plain}% default 
+\newtheorem{thm}{Theorem}[section] 
+\newtheorem{lem}{Lemma}[thm] 
+\newtheorem{prop}[lem]{Proposition} 
+\newtheorem{cor}{Corollary}[thm]
+\newtheorem*{claim}{Claim}
+\newtheorem{case}{Case}
+\theoremstyle{definition}
+\newtheorem{defn}{Definition}[section] 
+\newtheorem*{ques}{Question}
+\newtheorem{conj}{Conjecture}[section]
+\newtheorem{exmp}{Example}[section]
+\newtheorem{exer}{Exercise}[section]
+\theoremstyle{remark} 
+\newtheorem*{rem}{Remark} 
+\newtheorem*{note}{Note}
+
+%Command Changes%
+\renewcommand{\contentsname}{Table of Contents}
+\renewenvironment{proof}{{\bfseries Proof.}}{ \\ \qed}
+
+%New Custom Commands%
+%Math Notations
+\newcommand{\R}{{\mathbb R}}
+\newcommand{\Z}{{\mathbb Z}}
+\newcommand{\N}{{\mathbb N}}
+\newcommand{\Q}{{\mathbb Q}}
+\newcommand{\C}{{\mathbb C}}
+\newcommand{\multdot}{\text{·}}
+\newcommand{\sq}{\ensuremath{^2}}
+\newcommand\numberthis{\addtocounter{equation}{1}\tag{\theequation}}
+%Simple Footnote
+\newcommand{\simplefn}[1]{\hfill \sl{\footnotesize{#1}} \\ }
+%Section Decoration
+\newcommand{\sectiondecor}{
+    \begin{center}
+    \vspace{-0.2in}
+    \line(1,0){300} \\
+    \large{$\infty$}    
+    \end{center}
+}
+%Syllabus Commands
+\newcommand{\infopointer}[2]{\large{\textbf{#1:}} \textit{#2}}
+%For Notes:
+\newcommand{\remarklinebreak}{\hfill \break \vspace{-0.3in}}
+
+%%%MAIN DOC BEGINS%%%
+\title{Vim + \LaTeX: Setup Guide for Arch Linux}
+\author{\textbf{Sanjyot Shenoy}}
+\date{2021}
+
+
+\pagestyle{fancy}
+\fancyhf{}
+\lhead{Vim + \LaTeX}
+\rhead{Sanjyot Shenoy}
+\rfoot{Page \thepage}
+\renewcommand{\footrulewidth}{0.4pt}
+
+\begin{document}
+	\maketitle
+	\tableofcontents
+	\section{Setting up of Arch Linux}
+	First we begin with installation of the Arch Linux Distro which is the most popopular Distro, known for its simplicity.
+	\begin{enumerate}
+		\item First get the archlinux.iso from internet. Assuming you have a VMWare Fusion as your VM Provider, boot up the VM from this .iso file. 
+		\item Now follow this guide on setting up ArchLinux:\\ \url{https://phoenixnap.com/kb/arch-linux-install}.
+		\item \textbf{Note:} There appears to be some problem while setting up the locale \texttt{en\_IN.UTF-8} so it is recommeneded to use the locale  \texttt{en\_IN.UTF-8}, to check whether locale settings are correctly set up, use the \texttt{locale} command.
+		\item After Arch has been set up, we will install the GNOME Desktop Environment with a Display Manager. For this we follow the guide given at:\\ \url{https://phoenixnap.com/kb/arch-linux-gnome}. 
+		\item Note that, many basic packages need to be installed like \texttt{sudo, git}, etc., also it is recommended to make a new user which will be the main user by using \texttt{su - (your\_username)} and then giving it \texttt{sudo} privileges.	
+	\end{enumerate}
+	\section{Setting up Vim and Vim-Plug}
+	Now we wish to set up Vim and its plugins through the vim-plug Plugin Manager, we could also use Vundle or others, but this is the most efficient plugin manager so we shall go with it. To make use of clipboard copy-paste in Vim, we install gVim (GUI Vim). Again, from here on, we will be a primary user(we will go with the name 'sanju' for simplicity) with sudo privileges and not root. 
+	\begin{enumerate}
+		\item First switch to the non-root user: \\
+			\texttt{su - sanju}
+		\item Now install gVim: \\
+			\texttt{ sudo pacman -Ss gvim \\
+			sudo pacman -S gvim}\\
+		Note: \texttt{-Ss} is used to search packages, and \texttt{-S} is used for installation.
+		\item Now install vim-plug using following: \\
+			\texttt{
+curl -fLo ~/.vim/autoload/plug.vim --create-dirs \textbackslash \\
+    https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim } \\
+    or just by Downloading \url{https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim} and putting it inside \texttt{~/.vim/autload}.
+    		\item Verify vim-plug Install by starting vim and using the command: \\ 
+			\texttt{:PlugInstall}
+	\end{enumerate}
+	If the command doesn't throw an error then vim-plug is correctly installed. Now we need to install \TeX-Live Package which is the actual \LaTeX package.
+	\section{Installing \TeX-Live Package}
+	Now we wish to install \LaTeX on to our system. For this, we just need to use the following command: \\
+	\texttt{sudo pacman -S texlive-most}\\
+	Depending on the internet speed, this will take some time. You can also add additional languages support to \TeX by using: \\
+	\texttt{sudo pacman -S texlive-lang}\\
+	and then specifying the option numbers of the packages you wish to install.
+	\section{Installing and configuring vim plugins}
+	\textbf{From now on, do NOT use vim as \texttt{sudo vim} as there are differences between the user and root vim configurations.} \\
+	Before we can edit the Vim Configuration File which is the .vimrc file, we need to first grant the owenership of the configuration file to the non-root user by the command: \\
+	\texttt{sudo chown sanju $\sim$/.vimrc}\\
+	And now we can edit the configuration file without using \texttt{sudo}.\\
+	Now, we edit the .vimrc file by the following command: \\
+	\texttt{vim $\sim$/.vimrc}\\
+	Now, edit your .vimrc file to make it look like this: \\
+	\texttt{call plug\#begin() \\
+	Plug 'sirver/ultisnips' \\
+	    let g:UltiSnipsExpandTrigger = '<tab>' \\
+	    let g:UltiSnipsJumpForwardTrigger = '<tab>' \\
+	    let g:UltiSnipsJumpBackwardTrigger = '<s-tab>'\\
+	    let g:UltiSnipsSnippetDir=[\$HOME.'/.vim/UltiSnips'] \\
+	\\
+	Plug 'lervag/vimtex' \\
+	    let g:tex\_flavor='latex' \\
+	    let g:vimtex\_view\_method='zathura'\\
+	    let g:vimtex\_quickfix\_mode=0\\
+	\\
+	Plug 'preservim/nerdtree'\\
+	\\
+	Plug 'vim-airline/vim-airline'\\
+	\\
+	Plug 'KeitaNakamura/tex-conceal.vim'\\
+	    set conceallevel=1\\
+	    let g:tex\_conceal='abdmg'\\
+	    hi Conceal ctermbg=none\\
+	\\
+	Plug 'dylanaraps/wal'\\
+	colorscheme wal\\
+	set background=dark\\
+	\\
+	call plug\#end()\\
+	\\
+	:set nu \\
+	setlocal spell\\
+	set spelllang=en\_us\\
+	"inoremap <C-l> <c-g>u<Esc>[s1z=`]a<c-g>u}\\
+	After setting the configuration file, we now install the plugins by: \\
+	\texttt{vim \\
+	:PlugInstall} \\
+	Now, we wait for sometime and after the plugins are successfully installed, we now proceed to install our snippets.
+	\section{Setting up snippets for \TeX}
+	Now comes the most important part, for which we went through the entire ordeal above. We create the snippets file by the following command: \\
+	\texttt{vim $\sim$/.vim/UltiSnips/tex.snippets}\\
+	Now, set your desired snippets as you like. My tex.snippets file is available online. 
+		
+\end{document}
