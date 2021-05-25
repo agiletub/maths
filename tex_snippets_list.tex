@@ -197,16 +197,16 @@
 		desc & 0 & Description List & b & N &  \\ \hline
 		breakdesc & 0 & Break Thm. Desc. List & b & N &  \\ \hline
 		pac & 0 & Package & b & N & Use pacakage command \\ \hline
-		mk &  & 0 &  &  &  \\ \hline
-		dm &  & 0 &  &  &  \\ \hline
-		ali &  & 0 &  &  &  \\ \hline
-		$\frac{d_3}{d_2}$ $ &  & 0 &  &  &  \\ \hline
+		mk & Inline Maths & 0 & wA & N &  \\ \hline
+		dm & Display Maths & 0 & wA & N &  \\ \hline
+		ali & Align Maths & 0 & bA & N &  \\ \hline
 		 &  & 0 &  &  &  \\ \hline
 		 &  & 0 &  &  &  \\ \hline
 		 &  & 0 &  &  &  \\ \hline
 		 &  & 0 &  &  &  \\ \hline
 		 &  & 0 &  &  &  \\ \hline
-		 &  &  &  &  &  \\ \hline
+		 &  & 0 &  &  &  \\ \hline
+		 &  & 0 &  &  &  \\ \hline
 		\end{tabular}
 	\end{table}
 	\end{center}
@@ -218,8 +218,12 @@
 		\textbf{Trigger Word} & \textbf{Priority} & \textbf{Description} & \textbf{Options} & \textbf{Math Mode Only?} & \textbf{Notes} \\
 		\hline
 		\hline
-		... & 100 & \textbackslash ldots & iA & N & Lower Dots \\ \hline 
-		\end{tabular}
+		... & 100 & \textbackslash ldots & iA & N & Lower Dots \\ \hline 	
+		=> &  & 0 & Ai &  &  \\ \hline
+		=< &  & 0 & Ai &  &  \\ \hline
+		iff &  & 0 &  &  &  \\ \hline
+		 &  & 0 &  &  &  \\ \hline
+	\end{tabular}
 	\end{table}
 	\end{center}
 \end{document}

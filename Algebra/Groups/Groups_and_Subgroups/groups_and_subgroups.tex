@@ -171,12 +171,48 @@
 		\begin{enumerate}
 			\item $+$ (usual addition) is a commutative binary operation on $\Z$ (or on $\Q$, $\R$, or $\C$ respectively). 
 			\item $\times $ (usual multiplication) is a commutative binary operation on $\Z$ (or on $\Q$, $\R$, or $\C$ respectively).
+			\item $-$ (usual subtraction) is a non-commutative binary operation on $\Z$, where $-(a,b)=a-b$. The map $a\mapsto -a$ is not a binary operation.
+			\item Taking the  vector cross-product of two vectors in 3-space $\R^3$ is a binary operation which is not associative and not commutative.
 		\end{enumerate}
 	\end{bexmp}
-	\begin{rem}This is a remark.	
+	\begin{rem}
+		\leavevmode \vspace{-\baselineskip}
+		\begin{enumerate}
+			\item  Suppose that $*$ is a binary operation on a set $G$ and $H\subset G$. If the restriction of $*$ to $H$ is a binary operation on $H$, i.e, $\forall a,b\in H$, $a*b\in H$, then  $H$ is said to be \textbf{closed} under $*$. 
+			\item Observe that is $*$ is associative (respectively, commutative) binary operation on $G$ and $*$ restricted to some subset $H$ of $G$ is a binary operation on $H$, then $*$ is automatically associative (respectively, commutative) on $H$ as well. 
+		\end{enumerate}
 	\end{rem}
-	\begin{note}
-		This is a note.
-	\end{note}
+	\subsection{Group}
+	\begin{defn}[Group]
+		A \textbf{Group} is an ordered pair $(G,*)$ where $G$ is a set and $*$ is a binary operation on $G$ satisfying the following axioms:
+		\begin{enumerate}
+			\item (Associative) $(a*b)*c=a*(b*c)$, $\forall a,b,c\in G$, i.e.,$*$ is associative.
+			\item (Existence of Identity) There exists an element $e$, called an identity of $G$, such that $\forall a\in G$, we have $a*e=e*a=a$.
+			\item (Existence of Inverses) $\forall a\in G$, $\exists a^{-1}\in G$, called an inverse of $a$, such that $a*a^{-1}=a^{-1}*a=e$. 
+		\end{enumerate}
+	\end{defn}
+	
+	\begin{defn}[Abelian Group]
+			A Group $(G,*)$ is said to be an Abelian group if the binary operation $*$ on $G$ is commutative for all elements of $G$.
+	\end{defn}
+	\begin{rem}
+		\leavevmode \vspace{-\baselineskip}
+		\begin{enumerate}
+			\item We shall immediately become less formal and say G is a group under * if $(G,*)$ is a group (or just $G$ is a group when the operation $*$ is clear from the context).
+			\item (Finite Group) - If the set $G$ is a finite set, then the group $G$ is called a finite group.
+			\item (Non-emptiness of set): By axiom on existence of identity, the set $G$ is non-empty.
+		\end{enumerate}
+	\end{rem}
+	\subsubsection*{Direct Product of Groups}
+	If $(A,*)$ and $(B,\diamond )$ are groups, we can form a new group $A\times B$ called their \textbf{direct product}, whose elements are those in the Cartesian product.
+	\[
+		A\times B = \{(a,b)|a\in A,\, b\in B\}
+	.\] 
+	and whose operation is defined componentwise: 
+	\[
+		(a_{1},b_{1})(a_{2},b_{2}) = (a_{1}*a_{2},b_{1}\diamond b_{2})
+	.\]
+	It is easy to check that this is a group.
 
-	\end{document}
+
+\end{document}
